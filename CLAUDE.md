@@ -40,7 +40,7 @@ Each HTML page loads scripts in this order: data files → `app.js` → feature 
 - **`window.APP`** (`app.js`) — Shared state (current case/tab, PII reveal log), utility formatters (`formatSLACountdown`, `getCategoryColor`, `getIconSVG`, etc.), tab switching for Panel 3 (`.p3-tab`/`.p3-content`) and Panel 4 (`.p4-tab`/`.p4-content`).
 - **`window.QUEUE`** (`queue.js`) — Renders queue cards, handles filters/pinning/search. Navigates to `case.html?case=ID` on click.
 - **`window.TIMELINE`** (`timeline.js`) — Reads `?case=` from URL, renders touchpoint rows from `TOUCHPOINTS[caseId]`, calls `PANELS.showTouchpointDetail(tp)` on row click.
-- **`window.PANELS`** (`panels.js`) — The largest module. Owns all Panel 3 and Panel 4 rendering: case header, SLA bar, active flag banners, touchpoint detail, documents, PII masking/reveal, notes, and all five AI Copilot tabs. Also owns `PANELS.piiRevealed` state and `PANELS.aiInteractionLog`.
+- **`window.PANELS`** (`panels.js`) — The largest module. Owns all Panel 3 and Panel 4 rendering: case header, SLA bar, active flag banners, touchpoint detail, documents, PII masking/reveal, notes, and all three AI Copilot tabs. Also owns `PANELS.piiRevealed` state and `PANELS.aiInteractionLog`. Note: `renderAIDraftResponse()` and `renderRegulationRef()` are no-op stubs — their content was merged into `renderAIActions()` (Response Letter `<details>`) and `renderAISummary()` (Regulation Reference `<details>`) respectively. Similarly `renderRegEForm()` and `renderFCRALog()` are no-ops; Reg E form and FCRA E-OSCAR log are rendered inline within `renderAIActions()`.
 - **`window.COPILOT`** (`copilot.js`) — Pure data: hardcoded AI responses keyed by `caseId`. Methods: `getSummary()`, `getInvestigationMemo()`, `getDraftResponse()`, `getPrecedents()`.
 - **`window.SUPERVISOR`** (`supervisor.js`) — Reads `window.CASES` directly, renders the team queue table, workload summary, and SLA breach alerts.
 
@@ -74,6 +74,23 @@ SLA deadlines are stored as ISO strings. `APP.formatSLACountdown(deadline)` retu
 1. Add color in `APP.getCategoryColor()` in `app.js`
 2. Add label in `APP.getCategoryLabel()` in `app.js`
 3. Add a filter button in the timeline filter bar in `case.html`
+
+### Theming
+
+The prototype uses a **light theme**. CSS variables are defined in `styles/main.css` under `:root` (`--bg-base`, `--bg-surface`, `--bg-elevated`, `--bg-panel`, `--border-subtle`, `--border-default`, `--text-primary`, `--text-secondary`, `--text-muted`, `--accent`, `--accent-hover`). Semantic SLA colors (`--sla-red`, `--sla-amber`, `--sla-green`) are unchanged. Do not use dark Tailwind utilities (`slate-*`, `bg-*-950`, `bg-*-900/*`) — use `gray-*` and light pastel equivalents (`bg-*-50`, `border-*-200`, `text-*-700`).
+
+### Panel 4 tab structure
+
+Panel 4 (AI Copilot) has **3 tabs**, not 5:
+- `data-tab="summary"` — AI Summary + Regulation Reference collapsible at bottom
+- `data-tab="investigation"` — Deep Case Investigation / AI memo
+- `data-tab="actions"` — Resolve: determination form, remediation actions, Response Letter collapsible at bottom
+
+The old `data-tab="draft"` and `data-tab="regulation"` divs and their tab buttons have been removed from `case.html`.
+
+### PDF touchpoint
+
+Touchpoints with `payload.format === 'PDF'` render an inline PDF viewer placeholder in `PANELS.showTouchpointDetail()`. The `document` category (sky blue `#0ea5e9`) is registered in `APP.getCategoryColor()` and `APP.getCategoryLabel()`. Example: `TP-10011` / `DOC-44015` in `CASE-2024-0441`.
 
 ## Keeping this file current
 

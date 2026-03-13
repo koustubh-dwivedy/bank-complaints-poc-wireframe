@@ -1,15 +1,16 @@
 // App state + routing
 window.APP = {
+  productName: 'Hughes AI',
   currentCaseId: null,
   currentPanel3Tab: 'touchpoint',
   currentPanel4Tab: 'summary',
   revealedPIIFields: new Set(),
   piiAccessLog: [],
   activeTimelineFilter: 'all',
-  darkMode: true,
+  darkMode: false,
 
   init() {
-    // Apply dark mode
+    // Light mode — no dark class applied
     if (this.darkMode) document.documentElement.classList.add('dark');
   },
 
@@ -92,7 +93,8 @@ window.APP = {
       account_lifecycle: '#6b7280',
       credit_bureau: '#14b8a6',
       fraud_risk: '#f59e0b',
-      loan_servicing: '#8b5cf6'
+      loan_servicing: '#8b5cf6',
+      document: '#0ea5e9'
     };
     return colors[category] || '#6b7280';
   },
@@ -107,7 +109,8 @@ window.APP = {
       account_lifecycle: 'Account Lifecycle',
       credit_bureau: 'Credit Bureau',
       fraud_risk: 'Fraud/Risk',
-      loan_servicing: 'Loan Servicing'
+      loan_servicing: 'Loan Servicing',
+      document: 'Document'
     };
     return labels[category] || category;
   },
@@ -131,26 +134,26 @@ window.APP = {
 
   getPriorityBadge(priority) {
     const cfg = {
-      P1: 'bg-red-900/60 text-red-300 border border-red-700',
-      P2: 'bg-amber-900/60 text-amber-300 border border-amber-700',
-      P3: 'bg-blue-900/60 text-blue-300 border border-blue-700',
-      P4: 'bg-gray-800 text-gray-400 border border-gray-600'
+      P1: 'bg-red-100 text-red-700 border border-red-300',
+      P2: 'bg-amber-100 text-amber-700 border border-amber-300',
+      P3: 'bg-blue-100 text-blue-700 border border-blue-300',
+      P4: 'bg-gray-100 text-gray-500 border border-gray-300'
     };
     return cfg[priority] || cfg.P4;
   },
 
   getStatusBadge(status) {
     const cfg = {
-      'Draft': 'bg-gray-800 text-gray-400',
-      'Open': 'bg-blue-900/60 text-blue-300',
-      'Under Investigation': 'bg-indigo-900/60 text-indigo-300',
-      'Pending Customer Response': 'bg-yellow-900/60 text-yellow-300',
-      'Pending Internal Review': 'bg-orange-900/60 text-orange-300',
-      'Resolved': 'bg-green-900/60 text-green-300',
-      'Closed': 'bg-gray-800 text-gray-400',
-      'Reopened': 'bg-red-900/60 text-red-300'
+      'Draft': 'bg-gray-100 text-gray-500',
+      'Open': 'bg-blue-100 text-blue-700',
+      'Under Investigation': 'bg-indigo-100 text-indigo-700',
+      'Pending Customer Response': 'bg-yellow-100 text-yellow-700',
+      'Pending Internal Review': 'bg-orange-100 text-orange-700',
+      'Resolved': 'bg-green-100 text-green-700',
+      'Closed': 'bg-gray-100 text-gray-500',
+      'Reopened': 'bg-red-100 text-red-700'
     };
-    return cfg[status] || 'bg-gray-800 text-gray-400';
+    return cfg[status] || 'bg-gray-100 text-gray-500';
   }
 };
 

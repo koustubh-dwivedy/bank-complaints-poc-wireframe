@@ -60,18 +60,18 @@ window.QUEUE = {
     const priorityColors = { P1: 'text-red-400', P2: 'text-amber-400', P3: 'text-blue-400', P4: 'text-gray-500' };
 
     return `
-      <div class="case-card group cursor-pointer px-3 py-2.5 border-b border-slate-800 hover:bg-slate-800/50 transition-colors relative"
+      <div class="case-card group cursor-pointer px-3 py-2.5 border-b border-gray-200 hover:bg-gray-50 transition-colors relative"
            data-case-id="${c.id}">
         ${c.flags.holdReason ? `<div class="absolute left-0 top-0 bottom-0 w-0.5 bg-amber-500"></div>` : ''}
         <div class="flex items-start justify-between gap-2">
           <div class="flex-1 min-w-0">
             <div class="flex items-center gap-1.5 mb-0.5">
-              <span class="text-xs font-mono text-slate-400">${c.id}</span>
+              <span class="text-xs font-mono text-gray-500">${c.id}</span>
               <span class="text-[10px] font-semibold ${priorityColors[c.priority]}">${c.priority}</span>
               ${pinned ? `<svg viewBox="0 0 24 24" fill="#f59e0b" class="w-3 h-3 flex-shrink-0"><path d="M17 4v7l2 3H5l2-3V4h10zm-2 14h-6c0 1.1.9 2 2 2h2c1.1 0 2-.9 2-2zm-1-18H10c-.55 0-1 .45-1 1s.45 1 1 1h4c.55 0 1-.45 1-1s-.45-1-1-1z"/></svg>` : ''}
             </div>
-            <div class="text-xs font-medium text-slate-200 truncate">${c.category}</div>
-            <div class="text-[11px] text-slate-500 truncate">${customer?.displayName || 'Unknown'}</div>
+            <div class="text-xs font-medium text-gray-800 truncate">${c.category}</div>
+            <div class="text-[11px] text-gray-500 truncate">${customer?.displayName || 'Unknown'}</div>
           </div>
           <div class="flex flex-col items-end gap-1 flex-shrink-0">
             <div class="flex items-center gap-1 px-1.5 py-0.5 rounded text-[10px] font-bold" style="background:${slaColor}22;color:${slaColor};border:1px solid ${slaColor}44">
@@ -84,7 +84,7 @@ window.QUEUE = {
           </div>
         </div>
         <div class="flex items-center gap-1.5 mt-1.5 flex-wrap">
-          ${c.regulationTags.map(r => `<span class="text-[9px] px-1 py-0.5 rounded bg-slate-700 text-slate-300 font-medium">${r}</span>`).join('')}
+          ${c.regulationTags.map(r => `<span class="text-[9px] px-1 py-0.5 rounded bg-gray-100 text-gray-600 font-medium">${r}</span>`).join('')}
           <span class="text-[9px] px-1 py-0.5 rounded ${APP.getStatusBadge(c.status)}">${c.status}</span>
         </div>
       </div>

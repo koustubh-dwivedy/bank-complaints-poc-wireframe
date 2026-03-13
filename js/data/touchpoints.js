@@ -133,6 +133,29 @@ window.TOUCHPOINTS = {
         status: "received", pages: 2, submittedVia: "Secure Message"
       },
       aiFlag: null
+    },
+    {
+      id: "TP-10011",
+      customerId: "CUST-10042",
+      accountId: "ACC-8821034",
+      caseId: "CASE-2024-0441",
+      type: "document_generated",
+      category: "document",
+      occurredAt: "2024-03-14T10:00:00Z",
+      title: "Provisional Credit Decision Letter",
+      description: "Bank-generated provisional credit decision letter issued to customer per Reg E §205.11(c)(2). Sent via secure message. Stored in DMS.",
+      sourceSystem: "Document Management",
+      icon: "document",
+      payload: {
+        documentId: "DOC-44015",
+        documentType: "Provisional Credit Letter",
+        format: "PDF",
+        pages: 2,
+        sentVia: "Secure Message",
+        creditAmount: 1247.00,
+        determinationDeadline: "2024-04-23T08:14:00Z"
+      },
+      aiFlag: null
     }
   ],
 
@@ -436,7 +459,8 @@ window.DOCUMENTS = {
   "CASE-2024-0441": [
     { id: "DOC-44012", name: "Customer Dispute Affidavit", type: "Customer Submitted", status: "reviewed", pages: 2, received: "2024-03-12", preview: "Signed statement from customer attesting to unauthorized nature of three ACH debits." },
     { id: "DOC-44013", name: "ACH Transaction Detail Report", type: "Bank Generated", status: "reviewed", pages: 1, received: "2024-03-10", preview: "Core banking pull of ACH debit details: originator ID, trace numbers, posting timestamps." },
-    { id: "DOC-44014", name: "ACH Authorization Records Search", type: "Bank Generated", status: "reviewed", pages: 1, received: "2024-03-11", preview: "Authorization database query — no authorization on file for originator 9876543210." }
+    { id: "DOC-44014", name: "ACH Authorization Records Search", type: "Bank Generated", status: "reviewed", pages: 1, received: "2024-03-11", preview: "Authorization database query — no authorization on file for originator 9876543210." },
+    { id: "DOC-44015", name: "Provisional Credit Decision Letter", type: "Bank Generated", status: "reviewed", pages: 2, received: "2024-03-14", preview: "Provisional credit of $1,247.00 issued per Reg E §205.11(c)(2). Letter sent via secure message Mar 14, 2024." }
   ],
   "CASE-2024-0388": [
     { id: "DOC-38801", name: "Settlement Agreement Nov 2022", type: "Bank Generated", status: "reviewed", pages: 3, received: "2024-02-14", preview: "Signed settlement agreement confirming full payoff of $16,200 dated Nov 8, 2022." },

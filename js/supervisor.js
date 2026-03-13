@@ -25,7 +25,7 @@ window.SUPERVISOR = {
       <div class="overflow-x-auto">
         <table class="w-full text-xs border-collapse">
           <thead>
-            <tr class="text-slate-500 border-b border-slate-700">
+            <tr class="text-gray-500 border-b border-gray-200">
               <th class="text-left py-2 px-3">Case ID</th>
               <th class="text-left py-2 px-3">Category</th>
               <th class="text-left py-2 px-3">Customer</th>
@@ -43,17 +43,17 @@ window.SUPERVISOR = {
               const assoc = associates[c.assignedId];
               const slaInfo = this.getWorstSLA(c);
               const slaColor = APP.getSLAColor(slaInfo.status);
-              const priorityColors = { P1: 'text-red-400', P2: 'text-amber-400', P3: 'text-blue-400', P4: 'text-gray-500' };
+              const priorityColors = { P1: 'text-red-600', P2: 'text-amber-600', P3: 'text-blue-600', P4: 'text-gray-500' };
 
               return `
-                <tr class="border-b border-slate-800 hover:bg-slate-800/40 transition-colors cursor-pointer" onclick="window.location.href='case.html?case=${c.id}'">
-                  <td class="py-2 px-3 font-mono text-indigo-400">${c.id}</td>
-                  <td class="py-2 px-3 text-slate-300 max-w-32 truncate" title="${c.category}">${c.category}</td>
-                  <td class="py-2 px-3 text-slate-400">${customer?.displayName || '—'}</td>
+                <tr class="border-b border-gray-100 hover:bg-gray-50 transition-colors cursor-pointer" onclick="window.location.href='case.html?case=${c.id}'">
+                  <td class="py-2 px-3 font-mono text-indigo-600">${c.id}</td>
+                  <td class="py-2 px-3 text-gray-800 max-w-32 truncate" title="${c.category}">${c.category}</td>
+                  <td class="py-2 px-3 text-gray-600">${customer?.displayName || '—'}</td>
                   <td class="py-2 px-3">
                     <div class="flex items-center gap-1.5">
-                      <div class="w-5 h-5 rounded-full ${assoc?.color || 'bg-slate-700'} flex items-center justify-center text-[9px] font-bold text-white">${assoc?.avatar || '?'}</div>
-                      <span class="text-slate-300">${c.assignedTo}</span>
+                      <div class="w-5 h-5 rounded-full ${assoc?.color || 'bg-gray-400'} flex items-center justify-center text-[9px] font-bold text-white">${assoc?.avatar || '?'}</div>
+                      <span class="text-gray-700">${c.assignedTo}</span>
                     </div>
                   </td>
                   <td class="py-2 px-3">
@@ -62,7 +62,7 @@ window.SUPERVISOR = {
                   <td class="py-2 px-3 font-semibold ${priorityColors[c.priority]}">${c.priority}</td>
                   <td class="py-2 px-3">
                     <div class="flex gap-1 flex-wrap">
-                      ${c.regulationTags.map(r => `<span class="text-[9px] px-1 py-0.5 rounded bg-indigo-900/50 text-indigo-300">${r}</span>`).join('')}
+                      ${c.regulationTags.map(r => `<span class="text-[9px] px-1 py-0.5 rounded bg-indigo-50 text-indigo-700">${r}</span>`).join('')}
                     </div>
                   </td>
                   <td class="py-2 px-3">
@@ -70,8 +70,8 @@ window.SUPERVISOR = {
                   </td>
                   <td class="py-2 px-3">
                     <div class="flex gap-1.5" onclick="event.stopPropagation()">
-                      <button class="text-[10px] px-2 py-0.5 rounded bg-slate-700 text-slate-300 hover:bg-slate-600 transition-colors" onclick="SUPERVISOR.reassignCase('${c.id}')">Reassign</button>
-                      <button class="text-[10px] px-2 py-0.5 rounded bg-amber-900/40 text-amber-400 hover:bg-amber-900/60 border border-amber-700/40 transition-colors" onclick="SUPERVISOR.openQA('${c.id}')">QA</button>
+                      <button class="text-[10px] px-2 py-0.5 rounded bg-gray-200 text-gray-700 hover:bg-gray-300 transition-colors" onclick="SUPERVISOR.reassignCase('${c.id}')">Reassign</button>
+                      <button class="text-[10px] px-2 py-0.5 rounded bg-amber-50 text-amber-700 hover:bg-amber-100 border border-amber-300 transition-colors" onclick="SUPERVISOR.openQA('${c.id}')">QA</button>
                     </div>
                   </td>
                 </tr>
@@ -101,31 +101,31 @@ window.SUPERVISOR = {
       const p1Cases = myCases.filter(c => c.priority === 'P1').length;
 
       return `
-        <div class="p-3 rounded border border-slate-700 bg-slate-800/40">
+        <div class="p-3 rounded border border-gray-200 bg-white">
           <div class="flex items-center gap-2 mb-2.5">
             <div class="w-8 h-8 rounded-full ${assoc.color} flex items-center justify-center text-xs font-bold text-white">${assoc.avatar}</div>
             <div>
-              <div class="text-sm font-semibold text-slate-200">${assoc.name}</div>
-              <div class="text-[10px] text-slate-500">${myCases.length} active cases</div>
+              <div class="text-sm font-semibold text-gray-900">${assoc.name}</div>
+              <div class="text-[10px] text-gray-500">${myCases.length} active cases</div>
             </div>
           </div>
           <div class="grid grid-cols-3 gap-2">
-            <div class="text-center p-1.5 rounded bg-red-950/40 border border-red-800/40">
-              <div class="text-lg font-bold text-red-400">${redSLA}</div>
-              <div class="text-[9px] text-red-500">SLA Red</div>
+            <div class="text-center p-1.5 rounded bg-red-50 border border-red-300">
+              <div class="text-lg font-bold text-red-600">${redSLA}</div>
+              <div class="text-[9px] text-red-600">SLA Red</div>
             </div>
-            <div class="text-center p-1.5 rounded bg-amber-950/40 border border-amber-800/40">
-              <div class="text-lg font-bold text-amber-400">${amberSLA}</div>
-              <div class="text-[9px] text-amber-500">SLA Amber</div>
+            <div class="text-center p-1.5 rounded bg-amber-50 border border-amber-300">
+              <div class="text-lg font-bold text-amber-600">${amberSLA}</div>
+              <div class="text-[9px] text-amber-600">SLA Amber</div>
             </div>
-            <div class="text-center p-1.5 rounded bg-slate-700">
-              <div class="text-lg font-bold text-red-300">${p1Cases}</div>
-              <div class="text-[9px] text-slate-500">P1 Cases</div>
+            <div class="text-center p-1.5 rounded bg-gray-100">
+              <div class="text-lg font-bold text-red-600">${p1Cases}</div>
+              <div class="text-[9px] text-gray-500">P1 Cases</div>
             </div>
           </div>
           <div class="mt-2 flex gap-1.5">
-            <button onclick="SUPERVISOR.filterByAssociate('${assoc.id}')" class="text-[10px] px-2 py-0.5 rounded bg-slate-700 text-slate-300 hover:bg-slate-600 transition-colors">View Cases</button>
-            <button onclick="SUPERVISOR.bulkReassign('${assoc.id}')" class="text-[10px] px-2 py-0.5 rounded bg-slate-700 text-slate-300 hover:bg-slate-600 transition-colors">Bulk Reassign</button>
+            <button onclick="SUPERVISOR.filterByAssociate('${assoc.id}')" class="text-[10px] px-2 py-0.5 rounded bg-gray-200 text-gray-700 hover:bg-gray-300 transition-colors">View Cases</button>
+            <button onclick="SUPERVISOR.bulkReassign('${assoc.id}')" class="text-[10px] px-2 py-0.5 rounded bg-gray-200 text-gray-700 hover:bg-gray-300 transition-colors">Bulk Reassign</button>
           </div>
         </div>
       `;
@@ -155,13 +155,13 @@ window.SUPERVISOR = {
     }
 
     container.innerHTML = breaches.map(b => `
-      <div class="flex items-center gap-3 p-2.5 rounded border border-red-800/40 bg-red-950/20 cursor-pointer hover:bg-red-950/30 transition-colors" onclick="window.location.href='case.html?case=${b.caseId}'">
+      <div class="flex items-center gap-3 p-2.5 rounded border border-red-300 bg-red-50 cursor-pointer hover:bg-red-100 transition-colors" onclick="window.location.href='case.html?case=${b.caseId}'">
         <svg viewBox="0 0 24 24" fill="#ef4444" class="w-4 h-4 flex-shrink-0"><path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/></svg>
         <div class="flex-1">
-          <div class="text-xs font-medium text-red-300">${b.caseId} — ${b.label}</div>
-          <div class="text-[10px] text-slate-500">${b.category} · Assigned: ${b.assignedTo}</div>
+          <div class="text-xs font-medium text-red-700">${b.caseId} — ${b.label}</div>
+          <div class="text-[10px] text-gray-500">${b.category} · Assigned: ${b.assignedTo}</div>
         </div>
-        <span class="text-[11px] font-bold text-red-400 flex-shrink-0">${b.countdown.text}</span>
+        <span class="text-[11px] font-bold text-red-600 flex-shrink-0">${b.countdown.text}</span>
       </div>
     `).join('');
   },
